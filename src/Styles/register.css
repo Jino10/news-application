@@ -1,0 +1,71 @@
+.regform
+{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./../news2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.registerform
+{
+    width:30rem;
+    height:auto;
+    display:flex;
+    flex-direction: column;
+    background-color: transparent;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    border-radius: 20px;
+    border:1px solid black;
+}
+.registerform:after
+{
+    content:'';
+    height:200px;
+    width:200px;
+    background-color:  transparent;    
+    position:absolute;
+    top:4%;
+    left:20%;
+    border-radius: 50%;
+    border:1px solid white;
+    opacity:0.7;
+    z-index: -1;
+}
+.registerform:before
+{
+    content:'';
+    height:200px;
+    width:200px;
+    background-color:  transparent;
+    position:absolute;
+    bottom:4%;
+    right:20%;
+    border-radius: 50%;
+    border:1px solid white;
+    opacity:0.7;
+    z-index: -1;
+}
+h3
+{
+    text-align: center;
+    margin-top: 15px;
+    text-shadow: 5px 6px 10px rgba(255,255,255,0.4) ;
+    color:black;
+}
+label
+{
+    margin-bottom: 10px;
+    color: white;
+}
+input
+{
+    margin-bottom: 10px;
+}
+.registerbutton
+{
+    margin:20px 0px 30px 190px;
+    width:100px;
+}

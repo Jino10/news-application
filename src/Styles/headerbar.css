@@ -1,0 +1,63 @@
+
+.header-box
+{
+    background-image: url("./../news5.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity:1.0;
+}
+.content-box
+{
+    background-color:  transparent;
+    text-align: center;
+}
+.news-portal
+{
+    font-size: 30px;
+    color: white;
+}
+.date-label
+{
+  color:white;
+  width: 150px !important;
+  margin-top:33px!important;
+  font-size: 20px;
+}
+.date-input
+{
+    width: 200px !important;
+    height: 40px !important;
+    margin-top: 30px;
+    background-color: transparent;
+    color: white;
+}
+.date-form
+{
+    display: flex;
+    flex-direction: row;
+}
+.category
+{
+    margin-left:130px!important;
+    background-color: transparent;
+    color: white;
+}
+.news-list
+{
+    margin-left:50px!important;
+     background-color: transparent;
+    color: white;
+}
+.news h4
+{
+    color: black;
+    margin-top: 30px;
+}
+.news
+{
+    height:90px;
+    margin-top: 10px;
+    border-radius: 50%;
+    background-color: white;
+    opacity: 0.6;
+}

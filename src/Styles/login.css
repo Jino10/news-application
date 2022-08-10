@@ -1,0 +1,101 @@
+
+.login
+{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./../news15.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1.0;
+}
+.loginform
+{
+   width:20rem;
+   height:25rem;
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   background-color: white;
+   opacity:0.8;
+   box-shadow: 5px 6px 10px rgba(255,255,255,1.0);
+   border-radius: 20px;
+   border: 1px solid black;
+}
+.loginform:after
+{
+    content:'';
+    height:200px;
+    width:200px;
+    background-color:white;
+    position:absolute;
+    top:7%;
+    left:33%;
+    border-radius: 50%;
+    border: 1px solid black;
+    opacity:0.7;
+    z-index: -1;
+}
+.loginform:before
+{
+    content:'';
+    height:200px;
+    width:200px;
+    background-color:  white;
+    position:absolute;
+    bottom:7%;
+    right:33%;
+    border-radius: 50%;
+    border: 1px solid black;
+    opacity:0.7;
+    z-index: -1;
+}
+.welcomehome
+{
+    text-align: center;
+    margin-top: 15px;
+    text-shadow: 5px 6px 10px rgba(255,255,255,0.8) ;
+    color: black;
+}
+h6
+{
+    text-align: center;
+    color:black;
+    margin-top: 5px;
+}
+.linkbutton
+{
+    margin-left: 15px;
+    margin-top: 10px;
+    text-decoration: none;  
+    color: white;
+}
+.nameEntry
+{
+    margin:20px 0px 20px 10px;
+    color:black;
+    font-weight: bold;
+
+}
+.passwdEntry
+{
+    margin:20px 0px 20px 10px;
+    color:black;
+    font-weight: bold;
+
+}
+input
+{
+    margin-bottom: 30px;
+}
+button
+{
+    margin:10px 0px 0px 100px;
+}
+.logbutton
+{
+    margin-left: 5px;
+}
