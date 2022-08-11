@@ -1,19 +1,21 @@
 import Headerbar from './../Components/Headerbar';
 import './../Styles/view.css';
 import React,{  useEffect, useState } from 'react';
+import {useSelector} from 'react-redux'
 
 function ViewPage(){
               
       const[data,setData]=useState([]);
 
+      const url_data = useSelector(state=>state.user.current_news_obj)
       useEffect(()=>{
-         fetch("https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=1b8b7add947147cca7d2670ca0edd721").
+         fetch(`https://api.allorigins.win/get?url=${url_data.url}`).
          then((res)=>res.json()).
          then((response)=>{
           console.log(response);
-          setData(response.articles);
+          // setData(response.articles);
          })
-        })
+        },[url_data])
       // useEffect(()=>{
       //   handleLoginAxios();
       // })
@@ -30,7 +32,7 @@ function ViewPage(){
     return(
         <div className='main-box'>
             <Headerbar/>   
-            
+            {/* {JSON.stringify(url_data.url)} */}
              <div className='view-all'>
                <div className='row card-prop'>
                 {

@@ -1,18 +1,26 @@
-import { useContext, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import { emailValidation,passValidation } from '../Validation/loginValidation';
 import './../Styles/login.css';
-import UserContext from './UserContext';
+import {useDispatch,useSelector} from 'react-redux';
+import { loginAction } from '../Redux/userSlice';
 
 function LoginPage(){
    
               const[userInput,setUserInput]=useState({
+                                 request:"stefhi_login",
                                  email:"",
-                                 passwd:""
+                                 password:""
               });
 
-                    let navigate=useNavigate();
-                    let test=useContext(UserContext);
+                let dispatch=useDispatch();
+                let navigate=useNavigate();
+
+                useEffect(()=>{
+                  if(localStorage.getItem('id')){
+                     navigate('/home')
+                  }
+                },[])
 
               const[errmsg,setErrMsg]=useState('');
  
@@ -20,30 +28,24 @@ function LoginPage(){
                 setUserInput({...userInput,[key]:e.target.value});
               }
 
-              const submitForm=async()=>{
 
-                if(!emailValidation(userInput.email)){
-                    return setErrMsg("Please enter a user-id");
-                }
-                if(!passValidation(userInput.passwd)){
-                    return setErrMsg("Please enter valid password");
-                if(userInput.email !== "jino.x@capestart.com" || userInput.passwd !== "pass@123"){
-                    return setErrMsg("Invalid email and password");
-                }
-                }
-                await fetch(`https://karka.academy/api/action.php?request=stefhi_login&email=${userInput.email}&password=${userInput.passwd}`).
-                then((res)=>res.json()).
-                then((response)=>{
-                  console.log(response);
-                  test.setValid(response);
-                  if(response.status=="success"){
-                     navigate("/home");
-                  }
-                })
-                 localStorage.setItem("name",userInput.email);
-                 localStorage.setItem("pass",userInput.passwd);
+              const login=async()=>{
+               let status=await dispatch(loginAction(userInput));
+               if(status){
+                  navigate("/home");
+               }
               }
-              
+            
+               //  if(!emailValidation(userInput.email)){
+               //      return setErrMsg("Please enter a user-id");
+               //  }
+               //  if(!passValidation(userInput.password)){
+               //      return setErrMsg("Please enter valid password");
+               //  }
+               //  if(userInput.email !== "" || userInput.password !== ""){
+               //      return setErrMsg("Invalid email and password");
+               //  }
+                   
     return(
             <div className='login'>
                <form className="loginform was-validated">
@@ -54,11 +56,11 @@ function LoginPage(){
                   </div>
                   <div className="form-group">
                      <label for="pswd" className="form-label passwdEntry">Password</label>
-                     <input type="password" id="pswd" className="form-control" onChange={(e)=>handleInput(e,'passwd')}/>
+                     <input type="password" id="pswd" className="form-control" onChange={(e)=>handleInput(e,'password')}/>
                   </div>
                   {errmsg.length>0 &&(<div style={{marginTop:"20", color:"red"}}>{errmsg}</div>)}
                   <div>
-                     <button type="button" className="btn btn-dark logbutton" onClick={submitForm}>LOGIN</button>
+                     <button type="button" className="btn btn-dark logbutton" onClick={login}>LOGIN</button>
                   </div>
                   <h6>OR</h6>
                   <div>
