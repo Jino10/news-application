@@ -1,13 +1,27 @@
 import './../Styles/headerbar.css';
 import Dropdown from 'react-bootstrap/Dropdown';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {setDefault} from './../Redux/userSlice';
+
 
 function Headerbar(){
+
+    const navigate = useNavigate()
+    let dispatch=useDispatch();
+    let url_heading=useSelector((state)=>state.user);
+
+    const show=async()=>{
+      let status=await dispatch(setDefault);
+      localStorage.clear();
+      navigate('/')
+    }
+
     return(
         <div className='header-box'>
         <nav class="navbar navbar-expand-lg content-box">
           <div class="container-fluid">
-          <div className='news'><h4>NEWS-PORTAL</h4></div>
+          <div className='news'><h4>{url_heading. current_news_obj.name}</h4></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -53,7 +67,7 @@ function Headerbar(){
         <label for="day" className='form-label date-label'>Pick the date</label>
         <input type="date" id="day" className='form-control date-input'/>
       </form>
-     <Link to="/logout"><button type="button" className='btn btn-outline-light'>Logout</button></Link>
+     <button type="button" className='btn btn-outline-light' onClick={show}>Logout</button>
     </div>
   </div>
 </nav>
