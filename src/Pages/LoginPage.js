@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-// import { emailValidation,passValidation } from '../Validation/loginValidation';
+import { emailValidation,passValidation } from '../Validation/loginValidation';
 import './../Styles/login.css';
 import {useDispatch} from 'react-redux';
 import { loginAction } from '../Redux/userSlice';
@@ -22,7 +22,7 @@ function LoginPage(){
                   }
                 },[])
 
-            //   const[errmsg,setErrMsg]=useState('');
+              const[errmsg,setErrMsg]=useState('');
  
               const handleInput=(e,key)=>{
                 setUserInput({...userInput,[key]:e.target.value});
@@ -30,21 +30,20 @@ function LoginPage(){
 
 
               const login=async()=>{
+               if(!emailValidation(userInput.email)){
+                  return setErrMsg("Please enter a user-id");
+              }
+              if(!passValidation(userInput.password)){
+                  return setErrMsg("Please enter valid password");
+              }
+              if(userInput.email == "" || userInput.password == ""){
+                  return setErrMsg("Invalid email and password");
+              }
                let status=await dispatch(loginAction(userInput));
                if(status){
                   navigate("/home");
                }
               }
-            
-               //  if(!emailValidation(userInput.email)){
-               //      return setErrMsg("Please enter a user-id");
-               //  }
-               //  if(!passValidation(userInput.password)){
-               //      return setErrMsg("Please enter valid password");
-               //  }
-               //  if(userInput.email !== "" || userInput.password !== ""){
-               //      return setErrMsg("Invalid email and password");
-               //  }
                    
     return(
             <div className='login'>
@@ -58,7 +57,7 @@ function LoginPage(){
                      <label for="pswd" className="form-label passwdEntry">Password</label>
                      <input type="password" id="pswd" className="form-control" onChange={(e)=>handleInput(e,'password')}/>
                   </div>
-                  {/* {errmsg.length>0 &&(<div style={{marginTop:"20", color:"red"}}>{errmsg}</div>)} */}
+                  {errmsg.length>0 &&(<div style={{marginTop:"20", color:"red"}}>{errmsg}</div>)}
                   <div>
                      <button type="button" className="btn btn-dark logbutton" onClick={login}>LOGIN</button>
                   </div>

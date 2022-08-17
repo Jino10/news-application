@@ -1,14 +1,19 @@
+import axios from "axios";
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { nameValidation,mailValidation,passwdValidation } from "../Validation/registerValidation";
 import './../Styles/register.css';
 
 function RegisterPage(){
  
         const[getuser,setUser]=useState({
+                  request:"user_register",
                   name:"",
                   email:"",
-                  passwd:""
+                  password:""
         });
+
+        let navigate=useNavigate();
 
         const[err,setErr]=useState('');
 
@@ -16,20 +21,25 @@ function RegisterPage(){
             setUser({...getuser,[key]:e.target.value});
           }
 
-        const storeData=()=>{
+        const storeData=async()=>{
          // if(!nameValidation(getuser.name)){
          //    return setErr("Please enter a name");
          // }
          if(!mailValidation(getuser.email)){
             return setErr("Please enter a valid email address");
          }
-         if(!passwdValidation(getuser.passwd)){
+         if(!passwdValidation(getuser.password)){
             return setErr("Please enter a valid password");
          }
-         fetch(`https://karka.academy/api/action.php?request=user_register&name=${getuser.name}&email=${getuser.email}&password=${getuser.passwd}`).
-         then((res)=>res.json()).
-         then((response)=>{
+         await axios.post("https://karka.academy/api/",JSON.stringify(getuser)).
+         then(function(response){
             console.log(response);
+            if(response?.data?.status=="success"){
+               navigate("/");
+            }
+         }).
+         catch(function(error){
+            console.log(error);
          })
         }  
 
@@ -47,7 +57,7 @@ function RegisterPage(){
                   </div>
                   <div className="form-group">
                      <label for="pass" className="form-label">Password</label>
-                     <input type="password" id="pass" className="form-control" onChange={(e)=>handleInput(e,'passwd')}/>
+                     <input type="password" id="pass" className="form-control" onChange={(e)=>handleInput(e,'password')}/>
                   </div>
                   {err.length>0 &&(<div style={{marginTop:"20", color:"red",textAlign:"center"}}>{err}</div>)}
                   <div>

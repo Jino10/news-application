@@ -8,8 +8,8 @@ export const mailValidation=(email)=>{
 
 }
 
-export const passwdValidation=(passwd)=>{
+export const passwdValidation=(password)=>{
     let passRegex=/^(?=.*@\S)(?=.*[a-z])(?=.*[0-9]).{5,20}$/;
-    return passRegex.test(passwd);
+    return passRegex.test(password);
 
 }
