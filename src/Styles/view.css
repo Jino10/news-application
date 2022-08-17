@@ -12,10 +12,33 @@
 }
 .view-all
 {
-    margin:20px 0px 0px 70px;
+    margin:40px 0px 0px 70px!important;
 }
 .view-all .card-prop
 {
     box-shadow:3px 5px 7px rgba(255,255,255,0.5) ;
     opacity: 0.8;
+    position:relative;
+}
+.card-prop .each-card:hover
+{
+    transform: scale(1.2);
+    transition: transform 300ms ease-in;
+}
+.para
+{
+    position:absolute;
+    right:25px;
+    bottom:15px;
+}
+.head
+{
+   text-align: center;
+   font-weight: bold;
+}
+.readbtn
+{
+  position: absolute;
+  right:20px;
+  bottom:50px;
 }

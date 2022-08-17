@@ -3,7 +3,6 @@ import LoginPage from './../src/Pages/LoginPage';
 import RegisterPage from './../src/Pages/RegisterPage';
 import HomePage from './../src/Pages/HomePage';
 import ViewPage from './../src/Pages/ViewPage';
-import { useSelector } from 'react-redux';
 
 function App() {
    

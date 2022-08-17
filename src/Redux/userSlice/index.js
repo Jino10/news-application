@@ -28,6 +28,7 @@ export const userSlice=createSlice({
 })
 
 export const loginAction=(userInput)=>async(dispatch)=>{
+
     let {data}=await axios.post("https://karka.academy/api/",JSON.stringify(userInput));
     console.log(data);
     let response=data.data;

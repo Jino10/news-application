@@ -1,8 +1,8 @@
 import React,{ useEffect, useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import { emailValidation,passValidation } from '../Validation/loginValidation';
+// import { emailValidation,passValidation } from '../Validation/loginValidation';
 import './../Styles/login.css';
-import {useDispatch,useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { loginAction } from '../Redux/userSlice';
 
 function LoginPage(){
@@ -22,7 +22,7 @@ function LoginPage(){
                   }
                 },[])
 
-              const[errmsg,setErrMsg]=useState('');
+            //   const[errmsg,setErrMsg]=useState('');
  
               const handleInput=(e,key)=>{
                 setUserInput({...userInput,[key]:e.target.value});
@@ -58,7 +58,7 @@ function LoginPage(){
                      <label for="pswd" className="form-label passwdEntry">Password</label>
                      <input type="password" id="pswd" className="form-control" onChange={(e)=>handleInput(e,'password')}/>
                   </div>
-                  {errmsg.length>0 &&(<div style={{marginTop:"20", color:"red"}}>{errmsg}</div>)}
+                  {/* {errmsg.length>0 &&(<div style={{marginTop:"20", color:"red"}}>{errmsg}</div>)} */}
                   <div>
                      <button type="button" className="btn btn-dark logbutton" onClick={login}>LOGIN</button>
                   </div>
