@@ -121,6 +121,7 @@
    left:800px;
    top:400px;
 }
+
 .clickview
 {
     color:white;
@@ -134,4 +135,22 @@
     background-color: grey;
     opacity: 0.5;
     text-shadow: 3px 4px 5px black;
+}
+.date
+{
+    position: absolute;
+    right:40px;
+    top:30px;
+    color:#4682B4;
+    text-shadow: 3px 4px 5px black;
+    font-size: 20px;
+}
+.time
+{
+    position: absolute;
+    right:49px;
+    top:55px;   
+    color:#4682B4;
+    text-shadow: 3px 4px 5px black;
+    font-size: 20px;
 }

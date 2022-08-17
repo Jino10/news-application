@@ -2,7 +2,7 @@ import './../Styles/headerbar.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import {useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {setDefault} from './../Redux/userSlice';
+import {setDefault, setURLDetails} from './../Redux/userSlice';
 
 
 function Headerbar(){
@@ -16,6 +16,29 @@ function Headerbar(){
       localStorage.clear();
       navigate('/')
     }
+
+    let newsAll=[
+      {
+        name:"The Hindu",
+        url:"https://www.thehindu.com/news/national/feeder/default.rss"
+    },
+    {
+        name:"Times of India",
+        url:"https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms"
+     },
+    {
+        name:"The Indian Express",
+        url:"https://indianexpress.com/section/india/feed/"
+    },
+    {
+        name:"Oneindia",
+        url:"https://www.oneindia.com/rss/news-india-fb.xml"
+    },
+    {
+        name:"Hindustan times",
+        url:"https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml"
+    }
+    ];
 
     return(
         <div className='header-box'>
@@ -61,6 +84,16 @@ function Headerbar(){
       </Dropdown.Menu>
       
       </Dropdown>
+      {/* <select>
+      {
+        newsAll.map((v,k)=>
+        <option onChange={()=>dispatch(setURLDetails(v))}>
+          {v.name}
+        </option>
+        )
+      } 
+      </select>    */}
+
         </li>
       </ul>
       <form className='date-form'>
