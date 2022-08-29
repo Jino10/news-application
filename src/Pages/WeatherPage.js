@@ -39,28 +39,28 @@ const WeatherPage = () => {
         setSearch(input);
     }
 
-    // var emoji = null;
-    // if (typeof data['response'] != "undefined") {
-
-    //     if (data['response']['weather'][0].main == "Clouds") {
-    //         emoji = "fa-cloud"
-    //     }
-    //     else if (data['response']['weather'][0].main == "Thunderstorm") {
-    //         emoji = "fa-bolt"
-    //     }
-    //     else if (data['response']['weather'][0].main == "Drizzle") {
-    //         emoji = "fa-cloud-rain"
-    //     }
-    //     else if (data['response']['weather'][0].main == "Rain") {
-    //         emoji = "fa-cloud-shower-heavy"
-    //     }
-    //     else if (data['response']['weather'][0].main == "Snow") {
-    //         emoji = "fa-snow-flake"
-    //     }
-    //     else {
-    //         emoji = "fa-smog"
-    //     }
-    // }
+    const emojSelector = () => {
+        let emoji;
+        if (data['response']['weather'][0].main === "Clouds") {
+            emoji = "fa-cloud"
+        }
+        else if (data['response']['weather'][0].main === "Thunderstorm") {
+            emoji = "fa-bolt"
+        }
+        else if (data['response']['weather'][0].main === "Drizzle") {
+            emoji = "fa-cloud-rain"
+        }
+        else if (data['response']['weather'][0].main === "Rain") {
+            emoji = "fa-cloud-shower-heavy"
+        }
+        else if (data['response']['weather'][0].main === "Snow") {
+            emoji = "fa-snow-flake"
+        }
+        else {
+            emoji = "fa-smog"
+        }
+        return emoji
+    }
 
     let current = new Date();
     let date = current.getDate();
@@ -95,7 +95,7 @@ const WeatherPage = () => {
                                             {minute}:{hour}:{second}
                                         </p>
                                         <hr />
-                                        <i className="fas fa-cloud fa-4x"></i>
+                                        <i className={`fas ${emojSelector()} fa-4x`}></i>
                                         <h1 className="fw-bolder mb-3">{data["temp"]} &deg;C</h1>
                                         <p className="lead fw-bolder mb-0">{data['response']['weather'][0].main}</p>
                                         <p className="lead mb-2">{data["temp_min"]} &deg;C | {data["temp_max"]} &deg;C</p>
