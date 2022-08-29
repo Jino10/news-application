@@ -5,7 +5,7 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    background-image: url("./../news2.jpg");
+    background-image: url("./../images/news2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }

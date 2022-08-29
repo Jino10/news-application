@@ -2,7 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import './../Styles/home.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { setURLDetails, getUserDetails } from '../Redux/userSlice';
+import { getUserDetails, setDetails } from '../Redux/userSlice';
 function HomePage() {
 
     const dispatch = useDispatch();
@@ -64,14 +64,15 @@ function HomePage() {
             <div className="wrapper-box">
                 {
                     news_portal.map((v, k) =>
-                        <Link to="/view" key={k} onClick={() => dispatch((setURLDetails(v)))}><div className={v.class_name} ></div></Link>
+                        <Link to="/view" key={k} onClick={() => dispatch((setDetails(v)))}><div className={v.class_name} ></div></Link>
                     )
                 }
             </div>
 
             <marquee className="clickview">
-                If you want to choose a preferred news portal by simple click on it...!
+                If you want to open an required portal by simple click on it...!
             </marquee>
+
         </div>
     );
 }

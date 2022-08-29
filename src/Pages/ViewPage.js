@@ -1,12 +1,15 @@
 import Headerbar from './../Components/Headerbar';
 import './../Styles/view.css';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { viewDetails } from './../Redux/userSlice';
 
 function ViewPage() {
 
-   let navigate=useNavigate();
+   let navigate = useNavigate();
+
+   let dispatch = useDispatch();
 
    const [news, setNews] = useState([]);
 
@@ -16,28 +19,22 @@ function ViewPage() {
 
       const res = await fetch(`https://api.allorigins.win/get?url=${url_data.url}`);
       let xml_json = await res.json();
-
-      let json_data = await parseXml(xml_json.contents)
-      console.log(json_data);
-      let result = await json_data?.rss?.channel?.item;
-      setNews(result);
-      console.log(`updated news`, news);
-   });
-
-   useEffect(() => async () => {
-
-      const res = await fetch(`https://api.allorigins.win/get?url=${url_data.url}`);
-      let xml_json = await res.json();
       let json_data = await parseXml(xml_json.contents)
       // console.log(json_data);
-      let result = await json_data.rss.channel.item;
+      let result = await json_data?.rss?.channel?.item;
       setNews(result);
-      console.log(`updated news`, news);
+      console.log(news);
    }, [url_data]);
 
-      if(!url_data.url && localStorage.getItem('id') ){
-           navigate("/");
-      }
+   let getId = localStorage.getItem('id');
+
+   if (!url_data.url && getId) {
+      return dispatch(viewDetails);
+   }
+
+   if (!url_data.url && !getId) {
+      navigate('/');
+   }
 
    // JSON to XML convert
    const parseXml = async (xml) => {
@@ -68,28 +65,29 @@ function ViewPage() {
    return (
       <div className='main-box'>
          <Headerbar />
-         <div className='view-all'>
-            <div className='row card-prop'>
-               {
-                  news.map((v, k) =>
-                     <div className='col-3 each-card'>
-                        <div class="card" key={k} style={{ width: '18rem', height: '22rem', marginBottom: '15px' }}>
-                           <img class="card-img-top" src={v.image} alt="image" />
-                           <div class="card-body">
-                              <h6 class="card-title head">{v.title['#cdata'] ? v.title['#cdata'] : v.title}</h6>
-                              {/* <p class="card-text">{v.description.#cdata ? 1: v.description}</p> */}
-                              <a href={v.link} target="_blank">
-                                 <button type="button" className='btn btn-primary readbtn'>Read more...</button>
-                              </a>
-                              <p class="card-text para">{v.pubDate['#cdata'] ? v.pubDate['#cdata'] : v.pubDate}</p>
+         {news.length > 0 &&
+
+            <div className='view-all'>
+               <div className='row card-prop'>
+                  {
+                     news.map((v, k) =>
+                        <div className='col-3 each-card'>
+                           <div class="card" key={k} style={{ width: '18rem', height: '22rem', marginBottom: '15px' }}>
+                              <img class="card-img-top" src={v.image ? v.image : "image is not here"} alt="image" />
+                              <div class="card-body">
+                                 <h6 class="card-title head">{v.title['#cdata'] ? v.title['#cdata'] : v.title}</h6>
+                                 {/* <p class="card-text">{v.description['#cdata'] ? v.description['#cdata'] : v.description}</p> */}
+                                 <a href={v.link} target="_blank">
+                                    <button type="button" className='btn btn-primary readbtn'>Read more...</button>
+                                 </a>
+                                 <p class="card-text para">{v.pubDate['#cdata'] ? v.pubDate['#cdata'] : v.pubDate}</p>
+                              </div>
                            </div>
-                        </div>
-                     </div>)
-
-               }
-
+                        </div>)
+                  }
+               </div>
             </div>
-         </div>
+         }
       </div>
    );
 }
