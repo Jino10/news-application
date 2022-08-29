@@ -5,15 +5,18 @@
 }
 
 .wrapper_contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+}
+.wrapper_box{
     height: 100vh;
     width: 100%;
     background-image: url("./../images/news14.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .wrapper_contents div {
@@ -63,4 +66,12 @@ div .heading {
     color: black;
     opacity:0.6;
     font-weight: bold;
+}
+.hello{
+    font-size: 40px;
+    text-align: left;
+    text-transform: uppercase;
+    color:#755100;
+    padding:30px 0px 0px 20px;
+    text-shadow: 3px 4px 5px black;
 }
