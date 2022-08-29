@@ -1,74 +1,98 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-const initialState={
-    userDetails:{
-        id:null,
-        name:null,
-        email:null,
-        token:null
+const initialState = {
+    userDetails: {
+        id: null,
+        name: null,
+        email: null,
+        token: null
     },
-    current_news_obj : {
-        name : null,
-        url:null
+    current_news_obj: {
+        name: null,
+        url: null
     }
 }
 
-export const userSlice=createSlice({
-        name:'user',
-        initialState,
-        reducers:{
-            setUserDetails:(state,action)=>{
-                state.userDetails=action.payload;
-            },
-            setURLDetails:(state,action)=>{
-                state.current_news_obj=action.payload;
-            }
+export const userSlice = createSlice({
+    name: 'user',
+    initialState,
+    reducers: {
+        setUserDetails: (state, action) => {
+            state.userDetails = action.payload;
+        },
+        setURLDetails: (state, action) => {
+            state.current_news_obj = action.payload;
         }
+    }
 })
 
-export const loginAction=(userInput)=>async(dispatch)=>{
+export const loginAction = (userInput) => async (dispatch) => {
 
-    let {data}=await axios.post("https://karka.academy/api/",JSON.stringify(userInput));
+    let { data } = await axios.post("https://karka.academy/api/", JSON.stringify(userInput));
     console.log(data);
-    let response=data.data;
-    localStorage.setItem('id',response.id);
-    localStorage.setItem('name',response.name);
-    localStorage.setItem('email',response.email);
-    localStorage.setItem('token',response.token);
+    let response = data.data;
+    localStorage.setItem('id', response.id);
+    localStorage.setItem('name', response.name);
+    localStorage.setItem('email', response.email);
+    localStorage.setItem('token', response.token);
     dispatch(setUserDetails({
-            id:response.id,
-            name:response.name,
-            email:response.email,
-            token:response.token
+        id: response.id,
+        name: response.name,
+        email: response.email,
+        token: response.token
     }))
-    if(response.id){
+    if (response.id) {
         return true;
     }
-    else{
+    else {
         return false;
     }
-  } 
-
-  export const getUserDetails=async(dispatch)=>{
-    
- dispatch(setUserDetails({
-      id:localStorage.getItem('id'),
-      name:localStorage.getItem('name'),
-      email:localStorage.getItem('email'),
-      token:localStorage.getItem('token')
- }))
 }
 
-export const setDefault=async(dispatch)=>{
+export const getUserDetails = async (dispatch) => {
+
     dispatch(setUserDetails({
-        id:null,
-        name:null,
-        email:null,
-        token:null
+        id: localStorage.getItem('id'),
+        name: localStorage.getItem('name'),
+        email: localStorage.getItem('email'),
+        token: localStorage.getItem('token')
+    }))
+}
+
+export const setDefault = async (dispatch) => {
+    dispatch(setUserDetails({
+        id: null,
+        name: null,
+        email: null,
+        token: null
+    }))
+}
+
+export const setDetails = (v) => async (dispatch) => {
+
+    localStorage.setItem('news_name', v.name);
+    localStorage.setItem('news_url', v.url);
+    await dispatch(setURLDetails({
+        name: v.name,
+        url: v.url
+    }))
+}
+
+export const viewDetails = async (dispatch) => {
+    await dispatch(setURLDetails({
+        name: localStorage.getItem('news_name'),
+        url: localStorage.getItem('news_url')
+    }))
+}
+
+export const changeNews = (v) => async (dispatch) => {
+    dispatch(setURLDetails({
+        name: v.name,
+        url: v.url
     }))
 }
 
 
-export const {setUserDetails,setURLDetails}=userSlice.actions;
+export const { setUserDetails, setURLDetails } = userSlice.actions;
 export default userSlice.reducer;
