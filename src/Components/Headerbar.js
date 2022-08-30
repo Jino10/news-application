@@ -3,9 +3,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDefault } from './../Redux/userSlice';
+import { useState } from 'react';
 
-
-function Headerbar() {
+function Headerbar({dateChangeHandler}) {
 
   const navigate = useNavigate()
   let dispatch = useDispatch();
@@ -15,6 +15,10 @@ function Headerbar() {
     let status = await dispatch(setDefault);
     localStorage.clear();
     navigate('/')
+  }
+
+  const dateFilterHandler=(e)=>{
+       dateChangeHandler(e);
   }
 
   return (
@@ -66,7 +70,7 @@ function Headerbar() {
             </ul>
             <form className='date-form'>
               <label for="day" className='form-label date-label'>Pick the date</label>
-              <input type="date" id="day" className='form-control date-input' />
+              <input type="date" id="day" className='form-control date-input' onChange={(e)=>dateFilterHandler(e.target.value)} />
             </form>
             <button type="button" className='btn btn-outline-light' onClick={show}>Logout</button>
           </div>
