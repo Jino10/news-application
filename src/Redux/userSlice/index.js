@@ -93,6 +93,5 @@ export const changeNews = (v) => async (dispatch) => {
     }))
 }
 
-
 export const { setUserDetails, setURLDetails } = userSlice.actions;
 export default userSlice.reducer;
